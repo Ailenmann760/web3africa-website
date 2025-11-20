@@ -5,35 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web3 Africa | Engineering Africa's Decentralized Future</title>
-
     <meta name="description"
         content="Web3 Africa is a high-impact initiative engineering the decentralized future for Africa through elite education, a powerful community, and ecosystem-level development.">
-    <meta name="keywords"
-        content="Web3, Blockchain, Africa, Decentralized, Cryptocurrency, NFT, DeFi, Smart Contracts, Metaverse, Nigeria, Ghana, Kenya, SkillChain, Web3 Jobs, DLT, Bootcamps, Events, AMA">
-    <meta name="author" content="Web3 Africa">
-
     <link rel="icon" href="web3africa-logo.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            --color-primary: #E85A2A;
-            --color-secondary: #00D9FF;
-            --color-accent: #FFD23F;
-            --color-background: #0A0E27;
-            --color-surface: rgba(255, 255, 255, 0.05);
-            --color-border: rgba(255, 255, 255, 0.1);
-            --color-text-primary: #FFFFFF;
-            --color-text-secondary: #B4B8D0;
-            --color-text-subtle: #7A7E98;
+            --primary: #E85A2A;
+            --secondary: #00F0FF;
+            --accent: #FFD900;
+            --purple: #A855F7;
+            --bg: #05070E;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #FFFFFF;
+            --text-dim: #9CA3AF;
         }
 
         * {
@@ -43,11 +36,10 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--color-background);
-            color: var(--color-text-primary);
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
         h1,
@@ -60,156 +52,140 @@
             font-weight: 700;
         }
 
-        /* Background Effects */
-        .background-wrapper {
+        /* PARTICLE CANVAS BACKGROUND */
+        #particles-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.6;
         }
 
-        .background-gradient {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background:
-                radial-gradient(circle at 20% 40%, rgba(232, 90, 42, 0.22), transparent 45%),
-                radial-gradient(circle at 80% 60%, rgba(0, 217, 255, 0.18), transparent 45%),
-                radial-gradient(circle at 50% 80%, rgba(255, 210, 63, 0.12), transparent 40%),
-                radial-gradient(circle at 10% 90%, rgba(138, 43, 226, 0.08), transparent 35%);
-            animation: rotate 60s infinite linear;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Mesh Background Pattern */
-        .mesh-pattern {
-            position: absolute;
+        /* ANIMATED GRADIENT BACKGROUND */
+        .gradient-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.3;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(232, 90, 42, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 10%, rgba(255, 217, 0, 0.1) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite;
         }
 
-        /* Header Styles */
-        .header {
-            background: rgba(10, 14, 39, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-border);
-            transition: all 0.3s ease;
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
 
-        .header.scrolled {
-            background: rgba(10, 14, 39, 0.95);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        /* PREMIUM NAVIGATION */
+        .nav-blur {
+            background: rgba(5, 7, 14, 0.75);
+            backdrop-filter: blur(30px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        /* Button Styles */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-primary), #FF8C42);
+        .nav-blur.scrolled {
+            background: rgba(5, 7, 14, 0.9);
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        /* PREMIUM BUTTONS */
+        .btn-premium {
+            background: linear-gradient(135deg, var(--primary) 0%, #FF7043 100%);
             color: white;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(232, 90, 42, 0.3);
         }
 
-        .btn-primary::before {
+        .btn-premium::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
+        .btn-premium:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+        .btn-premium:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(232, 90, 42, 0.5);
         }
 
-        .btn-secondary {
-            background: var(--color-surface);
-            color: var(--color-text-primary);
-            border: 1.5px solid var(--color-border);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--color-secondary);
-            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        /* Card Styles */
-        .section-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 1.5rem;
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .section-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 107, 53, 0.3);
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.15);
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 240, 255, 0.2);
         }
 
-        /* Typing Animation Styles */
-        .typing-container {
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
+        /* TYPING ANIMATION WITH GRADIENT */
         .typing-word {
             display: inline-block;
             opacity: 0;
-            animation: fadeIn 0.3s forwards;
-            margin: 0 0.3rem;
+            animation: wordFadeIn 0.4s forwards;
+            margin: 0 0.4rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .typing-word.typed {
-            opacity: 0.25;
-            filter: blur(3.5px);
-            transition: all 0.6s ease;
+            opacity: 0.2;
+            filter: blur(4px);
+            transition: all 0.7s ease;
         }
 
         .typing-word.current {
             opacity: 1;
             filter: blur(0);
-            color: var(--color-primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        @keyframes fadeIn {
+        @keyframes wordFadeIn {
             to {
                 opacity: 1;
             }
@@ -217,15 +193,16 @@
 
         .cursor {
             display: inline-block;
-            width: 3px;
-            height: 2.5rem;
-            background: var(--color-primary);
-            margin-left: 0.2rem;
-            animation: blink 1s infinite;
-            vertical-align: middle;
+            width: 4px;
+            height: 3.5rem;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            margin-left: 0.3rem;
+            animation: cursorBlink 1.2s infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 20px var(--primary);
         }
 
-        @keyframes blink {
+        @keyframes cursorBlink {
 
             0%,
             49% {
@@ -238,183 +215,204 @@
             }
         }
 
-        /* Stats Section */
-        .stat-card {
-            padding: 2rem;
-            background: var(--color-surface);
-            border-radius: 1rem;
-            border: 1px solid var(--color-border);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: var(--color-primary);
-            transform: scale(1.05);
-        }
-
-        /* Initiative Cards */
-        .initiative-card {
+        /* 3D CARD EFFECTS */
+        .card-3d {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .initiative-card::after {
+        .card-3d::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .initiative-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* Partner Logos */
-        .partner-logo-container {
-            transition: all 0.3s ease;
-            filter: grayscale(100%);
-            opacity: 0.6;
-        }
-
-        .partner-logo-container:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        /* FAQ Styles */
-        .faq-item {
-            border-bottom: 1px solid var(--color-border);
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .faq-item summary {
-            list-style: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            font-weight: 600;
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .faq-item summary .icon {
-            transition: transform 0.3s ease;
-            width: 2rem;
-            height: 2rem;
-        }
-
-        .faq-item details[open] summary .icon {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            padding: 0 1rem 1.5rem 1rem;
-            color: var(--color-text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Scroll Animation */
-        .fade-in {
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(232, 90, 42, 0.15) 0%, transparent 50%);
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: opacity 0.3s;
         }
 
-        .fade-in.visible {
+        .card-3d:hover::before {
+            opacity: 1;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-12px) rotateX(5deg) rotateY(2deg);
+            box-shadow:
+                0 30px 80px rgba(232, 90, 42, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.15),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+
+        /* FLOATING ANIMATION */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* STATS COUNTER */
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(232, 90, 42, 0.3);
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Video Container */
-        .hero-video-container {
-            position: relative;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 2px solid var(--color-border);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        /* PARTNER LOGOS */
+        .partner-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s ease;
+            filter: grayscale(100%) opacity(0.7);
         }
 
-        /* Social Links */
-        .social-link {
+        .partner-box:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(232, 90, 42, 0.3);
+            filter: grayscale(0%) opacity(1);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(232, 90, 42, 0.15);
+        }
+
+        /* FAQ PREMIUM */
+        .faq-premium {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.25rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            transform: translateY(-3px);
-            color: var(--color-primary) !important;
+        .faq-premium:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 240, 255, 0.2);
         }
 
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .faq-premium summary {
+            padding: 1.75rem 2rem;
+            cursor: pointer;
+            list-style: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Custom Scrollbar */
+        .faq-premium summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-premium[open] summary {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .faq-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-premium[open] .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--color-background);
+            background: var(--bg);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
             border-radius: 10px;
+            border: 2px solid var(--bg);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-primary);
+            background: linear-gradient(180deg, #FF7043, #00F0FF);
         }
 
-        /* Responsive Typography */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
             .cursor {
-                height: 1.8rem;
+                height: 2rem;
             }
         }
     </style>
 </head>
 
 <body x-data="{ mobileMenuOpen: false }">
-    <div class="background-wrapper">
-        <div class="background-gradient"></div>
-        <div class="mesh-pattern"></div>
-    </div>
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
 
-    <header id="header" class="header sticky top-0 z-50">
+    <!-- Animated Gradient Background -->
+    <div class="gradient-bg"></div>
+
+    <!-- Premium Navigation -->
+    <header id="nav" class="nav-blur sticky top-0 z-50">
         <nav class="container mx-auto px-4 lg:px-8 flex items-center justify-between h-20">
             <a href="#home" class="flex items-center space-x-3">
-                <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-12 w-auto">
-                <span class="text-xl font-bold text-white">Web3 Africa</span>
+                <img src="web3africa-logo.png" alt="Web3 Africa" class="h-12 w-auto">
+                <span class="text-xl font-bold">Web3 Africa</span>
             </a>
-            <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-300">
-                <a href="#our-mission" class="hover:text-white transition-colors duration-300">Our Mission</a>
-                <a href="#initiatives" class="hover:text-white transition-colors duration-300">Core Initiatives</a>
-                <a href="#partners" class="hover:text-white transition-colors duration-300">Partners</a>
-                <a href="#faq" class="hover:text-white transition-colors duration-300">FAQ</a>
+            <div class="hidden lg:flex items-center space-x-8 font-medium">
+                <a href="#mission" class="hover:text-[var(--secondary)] transition">Mission</a>
+                <a href="#initiatives" class="hover:text-[var(--secondary)] transition">Initiatives</a>
+                <a href="#partners" class="hover:text-[var(--secondary)] transition">Partners</a>
+                <a href="#faq" class="hover:text-[var(--secondary)] transition">FAQ</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="#community"
-                    class="btn-primary font-semibold py-2.5 px-6 rounded-full text-sm hidden sm:block">Join
-                    Community</a>
+                <a href="#community" class="btn-premium hidden sm:block">Join Community</a>
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden text-gray-300 hover:text-white">
                     <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -423,121 +421,116 @@
                 </button>
             </div>
         </nav>
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="lg:hidden" x-transition>
-            <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="#our-mission" @click="mobileMenuOpen = false"
-                    class="block py-2 text-base font-medium text-gray-300 hover:text-white">Our Mission</a>
-                <a href="#initiatives" @click="mobileMenuOpen = false"
-                    class="block py-2 text-base font-medium text-gray-300 hover:text-white">Core Initiatives</a>
-                <a href="#partners" @click="mobileMenuOpen = false"
-                    class="block py-2 text-base font-medium text-gray-300 hover:text-white">Partners</a>
-                <a href="#faq" @click="mobileMenuOpen = false"
-                    class="block py-2 text-base font-medium text-gray-300 hover:text-white">FAQ</a>
-                <a href="#community" @click="mobileMenuOpen = false" class="block pt-4"><span
-                        class="btn-primary font-semibold py-2 px-5 rounded-full text-sm inline-block">Join
-                        Community</span></a>
-            </div>
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="lg:hidden px-4 pb-4 space-y-2">
+            <a href="#mission" @click="mobileMenuOpen = false"
+                class="block py-2 hover:text-[var(--secondary)]">Mission</a>
+            <a href="#initiatives" @click="mobileMenuOpen = false"
+                class="block py-2 hover:text-[var(--secondary)]">Initiatives</a>
+            <a href="#partners" @click="mobileMenuOpen = false"
+                class="block py-2 hover:text-[var(--secondary)]">Partners</a>
+            <a href="#faq" @click="mobileMenuOpen = false" class="block py-2 hover:text-[var(--secondary)]">FAQ</a>
         </div>
     </header>
 
     <main class="container mx-auto px-4 lg:px-8">
         <!-- Hero Section -->
-        <section id="home" class="py-24 md:py-32">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section id="home" class="py-24 md:py-32 min-h-screen flex items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
                 <div class="text-center lg:text-left">
                     <div id="heroTyping"
-                        class="typing-container text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                        <!-- Typing animation will be inserted here -->
+                        class="min-h-[200px] flex flex-col justify-center text-5xl md:text-7xl font-extrabold leading-tight mb-8">
                     </div>
-                    <p class="text-lg md:text-xl text-[var(--color-text-secondary)] mb-8 max-w-xl mx-auto lg:mx-0">
-                        Empowering Africa through blockchain education, community building, and innovation.
+                    <p
+                        class="text-xl md:text-2xl text-[var(--text-dim)] mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Empowering Africa through blockchain education, innovation, and a thriving community of
+                        builders.
                     </p>
-                    <div
-                        class="mt-8 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
-                        <a href="#initiatives"
-                            class="btn-primary font-semibold py-3.5 px-8 rounded-full text-base w-full sm:w-auto">Explore
-                            Initiatives</a>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#initiatives" class="btn-premium">Explore Initiatives</a>
                         <a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn-secondary font-semibold py-3.5 px-8 rounded-full text-base w-full sm:w-auto">Read
-                            Whitepaper</a>
+                            class="btn-glass">Read Whitepaper</a>
                     </div>
                 </div>
-                <div class="hero-video-container relative w-full h-80 md:h-[400px]">
-                    <video id="heroVideo" class="w-full h-full object-cover" autoplay loop playsinline
-                        poster="Web3_Nigeria_UI-UX-MODIFIED_page-0001.jpg" muted onclick="this.muted = !this.muted">
-                        <source src="herovideo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="float-animation relative">
+                    <div class="relative rounded-3xl overflow-hidden border-2 border-[var(--border)] shadow-2xl">
+                        <video id="heroVideo" class="w-full h-full object-cover rounded-3xl" autoplay loop muted
+                            playsinline>
+                            <source src="herovideo.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="py-12 fade-in">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="stat-card text-center">
-                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">15+</h3>
-                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Events</p>
+        <section class="py-16 reveal">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="stat-number counter" data-target="15">0</div>
+                    <p class="text-[var(--text-dim)] mt-2 font-medium">Events</p>
                 </div>
-                <div class="stat-card text-center">
-                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">36K+</h3>
-                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Community Members</p>
+                <div class="text-center">
+                    <div class="stat-number counter" data-target="36000">0</div>
+                    <p class="text-[var(--text-dim)] mt-2 font-medium">Community Members</p>
                 </div>
-                <div class="stat-card text-center">
-                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">6.4K+</h3>
-                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Projects Launched</p>
+                <div class="text-center">
+                    <div class="stat-number counter" data-target="6428">0</div>
+                    <p class="text-[var(--text-dim)] mt-2 font-medium">Projects Launched</p>
                 </div>
-                <div class="stat-card text-center">
-                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">900+</h3>
-                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Bootcamps</p>
+                <div class="text-center">
+                    <div class="stat-number counter" data-target="900">0</div>
+                    <p class="text-[var(--text-dim)] mt-2 font-medium">Bootcamps</p>
                 </div>
             </div>
         </section>
 
         <!-- Mission Section -->
-        <section id="our-mission" class="py-20 fade-in">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section id="mission" class="py-24 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">Our Mission</h2>
-                    <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
+                    <h2 class="text-5xl md:text-6xl font-extrabold mb-6"
+                        style="background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Our Mission</h2>
+                    <p class="text-lg text-[var(--text-dim)] mb-8 leading-relaxed">
                         To unlock Africa's potential by providing accessible Web3 education, fostering a vibrant
-                        community of builders, and connecting talent to global opportunities.
+                        community of builders, and connecting talent to global opportunities in the decentralized
+                        ecosystem.
                     </p>
                     <a href="https://web3africa.gitbook.io/web3-africa-documentation/vision-and-mission"
-                        class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        class="inline-flex items-center gap-2 text-[var(--secondary)] font-semibold text-lg hover:gap-4 transition-all">
                         Learn More
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
                     </a>
                 </div>
-                <div class="rounded-3xl overflow-hidden border-2 border-[var(--color-border)] shadow-2xl">
-                    <img src="Web3africa-our-mission.png" alt="A diverse group of people collaborating on Web3 projects"
-                        class="w-full h-auto object-cover">
+                <div class="rounded-3xl overflow-hidden">
+                    <img src="Web3africa-our-mission.png" alt="Our Mission"
+                        class="w-full h-auto object-cover rounded-3xl shadow-2xl">
                 </div>
             </div>
         </section>
 
-        <!-- Core Initiatives Section -->
-        <section id="initiatives" class="py-20 fade-in">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-4">Core Initiatives</h2>
-            <p class="text-center text-[var(--color-text-secondary)] mb-12 max-w-2xl mx-auto">
-                Explore our core initiatives that are driving Africa's Web3 revolution.
+        <!-- Core Initiatives -->
+        <section id="initiatives" class="py-24 reveal">
+            <h2 class="text-center text-5xl font-extrabold mb-4"
+                style="background: linear-gradient(135deg, #FFFFFF, var(--text-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Core Initiatives</h2>
+            <p class="text-center text-[var(--text-dim)] mb-16 text-lg max-w-2xl mx-auto">
+                Explore our core initiatives driving Africa's Web3 revolution
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="section-card initiative-card p-6">
-                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
-                        <img src="Web3africa-skillchain.png" alt="SkillChain Program"
-                            class="w-full h-full object-cover">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-3d">
+                    <div class="h-56 mb-6 rounded-xl overflow-hidden">
+                        <img src="Web3africa-skillchain.png" alt="SkillChain" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">SkillChain Program</h3>
-                    <p class="text-[var(--color-text-secondary)] mb-4">
+                    <h3 class="text-2xl font-bold mb-4">SkillChain Program</h3>
+                    <p class="text-[var(--text-dim)] mb-6 leading-relaxed">
                         Intensive training for in-demand Web3 skills. Build your future in blockchain development.
                     </p>
-                    <a href="https://tally.so/r/mJrEGX" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                    <a href="https://tally.so/r/mJrEGX" target="_blank"
+                        class="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:gap-4 transition-all">
                         Apply Now
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -545,17 +538,16 @@
                         </svg>
                     </a>
                 </div>
-                <div class="section-card initiative-card p-6">
-                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
-                        <img src="Web3africa-ambassador.png" alt="Ambassador Program"
-                            class="w-full h-full object-cover">
+                <div class="card-3d">
+                    <div class="h-56 mb-6 rounded-xl overflow-hidden">
+                        <img src="Web3africa-ambassador.png" alt="Ambassador" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Ambassador Program</h3>
-                    <p class="text-[var(--color-text-secondary)] mb-4">
-                        Become a community leader and represent Web3 Africa in your region.
+                    <h3 class="text-2xl font-bold mb-4">Ambassador Program</h3>
+                    <p class="text-[var(--text-dim)] mb-6 leading-relaxed">
+                        Lead your community and represent Web3 Africa in your region.
                     </p>
-                    <a href="https://forms.gle/w7tbXAA7jwbNFYe87" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                    <a href="https://forms.gle/w7tbXAA7jwbNFYe87" target="_blank"
+                        class="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:gap-4 transition-all">
                         Become an Ambassador
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -563,16 +555,16 @@
                         </svg>
                     </a>
                 </div>
-                <div class="section-card initiative-card p-6">
-                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
-                        <img src="incubator.png" alt="Project Incubation" class="w-full h-full object-cover">
+                <div class="card-3d">
+                    <div class="h-56 mb-6 rounded-xl overflow-hidden">
+                        <img src="incubator.png" alt="Incubation" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Project Incubation</h3>
-                    <p class="text-[var(--color-text-secondary)] mb-4">
+                    <h3 class="text-2xl font-bold mb-4">Project Incubation</h3>
+                    <p class="text-[var(--text-dim)] mb-6 leading-relaxed">
                         Resources and mentorship to build and launch your innovative Web3 idea.
                     </p>
                     <a href="mailto:web3africa2024@gmail.com"
-                        class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        class="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:gap-4 transition-all">
                         Submit a Project
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -580,17 +572,17 @@
                         </svg>
                     </a>
                 </div>
-                <div class="section-card initiative-card p-6">
-                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
-                        <img src="web3africa-events.png" alt="Bootcamps and Events" class="w-full h-full object-cover">
+                <div class="card-3d">
+                    <div class="h-56 mb-6 rounded-xl overflow-hidden">
+                        <img src="web3africa-events.png" alt="Events" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Bootcamps & Events</h3>
-                    <p class="text-[var(--color-text-secondary)] mb-4">
+                    <h3 class="text-2xl font-bold mb-4">Bootcamps & Events</h3>
+                    <p class="text-[var(--text-dim)] mb-6 leading-relaxed">
                         Hands-on workshops and insightful campus meetups across Africa.
                     </p>
                     <a href="https://docs.google.com/document/d/15fk93--FV_T__VQ_f11MhJbV0uKbTaIXcIZuahUmcU0/edit?usp=drivesdk"
-                        target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        target="_blank"
+                        class="inline-flex items-center gap-2 text-[var(--primary)] font-semibold hover:gap-4 transition-all">
                         View Schedule
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -602,127 +594,118 @@
         </section>
 
         <!-- Partners Section -->
-        <section id="partners" class="py-20 text-center fade-in">
-            <p class="text-sm text-[var(--color-text-secondary)] uppercase mb-6 font-semibold tracking-wider">Trusted
-                Partners Around the Globe</p>
-            <div class="section-card p-8 md:p-12">
-                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-                    <div class="partner-logo-container flex flex-col items-center">
-                        <img src="assets/Partner1.png" alt="EdenFi Logo" class="h-24 md:h-28 mb-3">
-                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">EdenFi</p>
-                    </div>
-                    <div class="partner-logo-container flex flex-col items-center">
-                        <img src="assets/Partner2.png" alt="Men in DeFi Logo" class="h-24 md:h-28 mb-3">
-                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Men in DeFi</p>
-                    </div>
-                    <div class="partner-logo-container flex flex-col items-center">
-                        <img src="assets/partner3.PNG" alt="Build A DAO Ethiopia Logo" class="h-24 md:h-28 mb-3">
-                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Build A DAO Ethiopia</p>
-                    </div>
-                    <div class="partner-logo-container flex flex-col items-center">
-                        <img src="irwa.png.jpg" alt="IncomRWA Logo" class="h-24 md:h-28 mb-3">
-                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">IncomRWA</p>
-                    </div>
-                    <div class="partner-logo-container flex flex-col items-center">
-                        <img src="edu.png.jpg" alt="Edubuk Logo" class="h-24 md:h-28 mb-3">
-                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Edubuk</p>
-                    </div>
+        <section id="partners" class="py-24 text-center reveal">
+            <p class="text-sm text-[var(--text-dim)] uppercase mb-8 font-semibold tracking-widest">Trusted Partners
+                Worldwide</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div class="partner-box">
+                    <img src="assets/Partner1.png" alt="EdenFi" class="h-20 mx-auto mb-3">
+                    <p class="text-sm text-[var(--text-dim)] font-medium">EdenFi</p>
+                </div>
+                <div class="partner-box">
+                    <img src="assets/Partner2.png" alt="Men in DeFi" class="h-20 mx-auto mb-3">
+                    <p class="text-sm text-[var(--text-dim)] font-medium">Men in DeFi</p>
+                </div>
+                <div class="partner-box">
+                    <img src="assets/partner3.PNG" alt="Build A DAO" class="h-20 mx-auto mb-3">
+                    <p class="text-sm text-[var(--text-dim)] font-medium">Build A DAO Ethiopia</p>
+                </div>
+                <div class="partner-box">
+                    <img src="irwa.png.jpg" alt="IncomRWA" class="h-20 mx-auto mb-3">
+                    <p class="text-sm text-[var(--text-dim)] font-medium">IncomRWA</p>
+                </div>
+                <div class="partner-box">
+                    <img src="edu.png.jpg" alt="Edubuk" class="h-20 mx-auto mb-3">
+                    <p class="text-sm text-[var(--text-dim)] font-medium">Edubuk</p>
                 </div>
             </div>
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-20 fade-in">
-            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-4">Frequently Asked Questions</h2>
-            <p class="text-center text-[var(--color-text-secondary)] mb-12">Everything you need to know about Web3
-                Africa</p>
-            <div class="max-w-4xl mx-auto">
-                <div class="faq-item">
-                    <details>
-                        <summary class="font-semibold text-lg">
-                            What is Web3 Africa?
-                            <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+        <section id="faq" class="py-24 reveal">
+            <h2 class="text-center text-5xl font-extrabold mb-4"
+                style="background: linear-gradient(135deg, #FFFFFF, var(--text-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Frequently Asked Questions</h2>
+            <p class="text-center text-[var(--text-dim)] mb-16 text-lg">Everything you need to know</p>
+            <div class="max-w-4xl mx-auto space-y-4">
+                <details class="faq-premium">
+                    <summary>
+                        What is Web3 Africa?
+                        <div class="faq-icon">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                        </summary>
-                        <div class="faq-answer">
-                            Web3 Africa is a high-impact initiative dedicated to building Africa's decentralized future.
-                            We focus on providing top-tier Web3 education, fostering a strong community of developers
-                            and creators, and connecting African talent with global opportunities in the blockchain
-                            space.
                         </div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary class="font-semibold text-lg">
-                            Who can join the SkillChain Program?
-                            <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                    </summary>
+                    <div class="px-8 py-6 text-[var(--text-dim)] leading-relaxed">
+                        Web3 Africa is a high-impact initiative dedicated to building Africa's decentralized future
+                        through elite Web3 education, community building, and connecting African talent with global
+                        opportunities.
+                    </div>
+                </details>
+                <details class="faq-premium">
+                    <summary>
+                        Who can join the SkillChain Program?
+                        <div class="faq-icon">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                        </summary>
-                        <div class="faq-answer">
-                            The SkillChain Program is designed for individuals across Africa who are passionate about
-                            learning Web3 technologies. While some programs may have prerequisites, we welcome
-                            beginners, developers, designers, and entrepreneurs who are eager to build a career in the
-                            decentralized ecosystem.
                         </div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary class="font-semibold text-lg">
-                            How can I become a partner?
-                            <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                    </summary>
+                    <div class="px-8 py-6 text-[var(--text-dim)] leading-relaxed">
+                        The SkillChain Program welcomes individuals across Africa passionate about Web3. We accept
+                        beginners, developers, designers, and entrepreneurs eager to build careers in the decentralized
+                        ecosystem.
+                    </div>
+                </details>
+                <details class="faq-premium">
+                    <summary>
+                        How can I become a partner?
+                        <div class="faq-icon">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                        </summary>
-                        <div class="faq-answer">
-                            We are always open to collaborating with organizations that share our vision for a
-                            decentralized Africa. If you're interested in partnering with us on events, education, or
-                            ecosystem development, please reach out to us via email at <a
-                                href="mailto:web3africa2024@gmail.com"
-                                class="text-[var(--color-primary)] hover:underline">web3africa2024@gmail.com</a>.
                         </div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary class="font-semibold text-lg">
-                            What kind of events do you host?
-                            <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                    </summary>
+                    <div class="px-8 py-6 text-[var(--text-dim)] leading-relaxed">
+                        We collaborate with organizations sharing our vision. Contact us at <a
+                            href="mailto:web3africa2024@gmail.com"
+                            class="text-[var(--secondary)] hover:underline">web3africa2024@gmail.com</a> for partnership
+                        opportunities.
+                    </div>
+                </details>
+                <details class="faq-premium">
+                    <summary>
+                        What kind of events do you host?
+                        <div class="faq-icon">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                        </summary>
-                        <div class="faq-answer">
-                            We host a variety of events, including technical workshops, developer bootcamps, campus
-                            meetups, and online AMA (Ask Me Anything) sessions with industry experts. Our goal is to
-                            provide continuous learning and networking opportunities for our community.
                         </div>
-                    </details>
-                </div>
+                    </summary>
+                    <div class="px-8 py-6 text-[var(--text-dim)] leading-relaxed">
+                        We host technical workshops, developer bootcamps, campus meetups, and AMA sessions with industry
+                        experts to provide continuous learning and networking opportunities.
+                    </div>
+                </details>
             </div>
         </section>
 
         <!-- Community Section -->
-        <section id="community" class="py-20 fade-in">
-            <div class="section-card p-8 md:p-12 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Join Our Community</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-[var(--color-text-secondary)] mb-8">
-                    Connect with thousands of builders, creators, and innovators. Get support, share ideas, and be part
-                    of Africa's Web3 revolution.
+        <section id="community" class="py-24 reveal">
+            <div class="card-3d text-center">
+                <h2 class="text-5xl font-extrabold mb-6"
+                    style="background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Join Our Community</h2>
+                <p class="text-xl text-[var(--text-dim)] mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Connect with thousands of builders, creators, and innovators. Be part of Africa's Web3 revolution.
                 </p>
-                <div class="mt-8 flex flex-wrap justify-center gap-4">
-                    <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer"
-                        class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://x.com/web3afric" target="_blank" class="btn-glass flex items-center gap-2">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
@@ -730,8 +713,7 @@
                         </svg>
                         X (Twitter)
                     </a>
-                    <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer"
-                        class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                    <a href="https://t.me/web3Afric" target="_blank" class="btn-glass flex items-center gap-2">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.24-3.11-2.04 2.07c-.23.23-.42.42-.83.42z">
@@ -739,8 +721,7 @@
                         </svg>
                         Telegram
                     </a>
-                    <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer"
-                        class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                    <a href="https://discord.gg/ahE7tcUA" target="_blank" class="btn-glass flex items-center gap-2">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8254-.6184 1.2525a17.2963 17.2963 0 00-4.8776 0 18.01 18.01 0 00-.6184-1.2525.077.077 0 00-.0785-.0371a19.7913 19.7913 0 00-4.8851 1.5152.0699.0699 0 00-.0321.027c-1.8431 4.6745-1.8431 9.673 0 14.3475a.069.069 0 00.0321.027c1.6222.4877 3.2651.8741 4.8851 1.1591a.076.076 0 00.0785-.0371c.2376-.4687.4599-.959.6443-1.4563a.0731.0731 0 00-.0429-.0861a12.8333 12.8333 0 01-1.2581-.6074a.0711.0711 0 01-.0076-.1037c.1258-.1744.2516-.3488.3774-.539a.0721.0721 0 01.082-.027c.4646.1349.9292.2539 1.4093.371a.077.077 0 00.0861-.051c.2309-.6877.3938-1.4225.4985-2.21822a.075.075 0 00-.051-.0861c-1.022-1.01-2.181-1.6248-3.4475-1.85a.0741.0741 0 01-.0586-.0861c.002-.021.003-.042.004-.063a.0711.0711 0 01.025-.059c1.048-1.028 2.34-1.442 3.815-1.442s2.767.414 3.815 1.442a.0711.0711 0 01.025.059c.001.021.002.042.004.063a.0741.0741 0 01-.0586.0861c-1.2665.2252-2.4255.84-3.4475 1.85a.075.075 0 00-.051.0861c.1047.7597.2676 1.4945.4985 2.21822a.077.077 0 00.0861.051c.4801-.1171.9447-.2361 1.4093-.371a.0721.0721 0 01.082-.027c.1258.1902.2516.3646.3774.539a.0711.0711 0 01-.0076.1037 12.8333 12.8333 0 01-1.2581.6074a.0731.0731 0 00-.0429.0861c.1844.4973.4067.9876.6443 1.4563a.076.076 0 00.0785.0371c1.6199-.285 3.2631-.6714 4.8851-1.1591a.069.069 0 00.0321-.027c1.8431-4.6745 1.8431-9.673 0-14.3475a.0699.0699 0 00-.0321-.027z">
@@ -754,89 +735,171 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="border-t border-gray-800/50 mt-20">
+    <footer class="border-t border-[var(--border)] mt-20">
         <div class="container mx-auto px-4 lg:px-8 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div>
-                    <a href="#home" class="flex items-center space-x-3 mb-6">
-                        <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-10 w-auto">
-                        <span class="text-xl font-bold text-white">Web3 Africa</span>
-                    </a>
-                    <p class="text-sm text-[var(--color-text-secondary)]">Building Africa's decentralized future</p>
+                    <img src="web3africa-logo.png" alt="Web3 Africa" class="h-10 mb-4">
+                    <p class="text-sm text-[var(--text-dim)]">Building Africa's decentralized future</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-4">Company</h4>
-                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
-                        <li><a href="#our-mission" class="hover:text-white transition-colors">Our Mission</a></li>
-                        <li><a href="#initiatives" class="hover:text-white transition-colors">Core Initiatives</a></li>
-                        <li><a href="#partners" class="hover:text-white transition-colors">Partners</a></li>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm text-[var(--text-dim)]">
+                        <li><a href="#mission" class="hover:text-white transition">Our Mission</a></li>
+                        <li><a href="#initiatives" class="hover:text-white transition">Core Initiatives</a></li>
+                        <li><a href="#partners" class="hover:text-white transition">Partners</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-4">Resources</h4>
-                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-3 text-sm text-[var(--text-dim)]">
                         <li><a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank"
-                                rel="noopener noreferrer" class="hover:text-white transition-colors">Whitepaper</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+                                class="hover:text-white transition">Whitepaper</a></li>
+                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-4">Contact</h4>
-                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
-                        <li><a href="mailto:web3africa2024@gmail.com"
-                                class="hover:text-white transition-colors">Email</a></li>
-                        <li><a href="#community" class="hover:text-white transition-colors">Join Community</a></li>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-sm text-[var(--text-dim)]">
+                        <li><a href="mailto:web3africa2024@gmail.com" class="hover:text-white transition">Email</a></li>
+                        <li><a href="#community" class="hover:text-white transition">Join Community</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t border-gray-800/50">
-                <p class="text-[var(--color-text-secondary)] text-sm order-2 md:order-1 mt-4 md:mt-0">&copy; <span
-                        id="copyright-year"></span> Web3 Africa. All Rights Reserved. Lagos, Nigeria.</p>
-                <div class="flex items-center space-x-5 order-1 md:order-2">
-                    <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6"
-                            fill="currentColor" viewBox="0 0 24 24">
+            <div class="pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-[var(--text-dim)]">&copy; <span id="year"></span> Web3 Africa. All Rights
+                    Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="https://x.com/web3afric" target="_blank"
+                        class="text-[var(--text-dim)] hover:text-[var(--secondary)] transition">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
                             </path>
-                        </svg></a>
-                    <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6"
-                            fill="currentColor" viewBox="0 0 24 24">
+                        </svg>
+                    </a>
+                    <a href="https://t.me/web3Afric" target="_blank"
+                        class="text-[var(--text-dim)] hover:text-[var(--secondary)] transition">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.24-3.11-2.04 2.07c-.23.23-.42.42-.83.42z">
                             </path>
-                        </svg></a>
-                    <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6"
-                            fill="currentColor" viewBox="0 0 24 24">
+                        </svg>
+                    </a>
+                    <a href="https://discord.gg/ahE7tcUA" target="_blank"
+                        class="text-[var(--text-dim)] hover:text-[var(--secondary)] transition">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8254-.6184 1.2525a17.2963 17.2963 0 00-4.8776 0 18.01 18.01 0 00-.6184-1.2525.077.077 0 00-.0785-.0371a19.7913 19.7913 0 00-4.8851 1.5152.0699.0699 0 00-.0321.027c-1.8431 4.6745-1.8431 9.673 0 14.3475a.069.069 0 00.0321.027c1.6222.4877 3.2651.8741 4.8851 1.1591a.076.076 0 00.0785-.0371c.2376-.4687.4599-.959.6443-1.4563a.0731.0731 0 00-.0429-.0861a12.8333 12.8333 0 01-1.2581-.6074a.0711.0711 0 01-.0076-.1037c.1258-.1744.2516-.3488.3774-.539a.0721.0721 0 01.082-.027c.4646.1349.9292.2539 1.4093.371a.077.077 0 00.0861-.051c.2309-.6877.3938-1.4225.4985-2.21822a.075.075 0 00-.051-.0861c-1.022-1.01-2.181-1.6248-3.4475-1.85a.0741.0741 0 01-.0586-.0861c.002-.021.003-.042.004-.063a.0711.0711 0 01.025-.059c1.048-1.028 2.34-1.442 3.815-1.442s2.767.414 3.815 1.442a.0711.0711 0 01.025.059c.001.021.002.042.004.063a.0741.0741 0 01-.0586.0861c-1.2665.2252-2.4255.84-3.4475 1.85a.075.075 0 00-.051.0861c.1047.7597.2676 1.4945.4985 2.21822a.077.077 0 00.0861.051c.4801-.1171.9447-.2361 1.4093-.371a.0721.0721 0 01.082-.027c.1258.1902.2516.3646.3774.539a.0711.0711 0 01-.0076.1037 12.8333 12.8333 0 01-1.2581.6074a.0731.0731 0 00-.0429.0861c.1844.4973.4067.9876.6443 1.4563a.076.076 0 00.0785.0371c1.6199-.285 3.2631-.6714 4.8851-1.1591a.069.069 0 00.0321-.027c1.8431-4.6745 1.8431-9.673 0-14.3475a.0699.0699 0 00-.0321-.027z">
                             </path>
-                        </svg></a>
-                    <a href="https://web3africaa.medium.com" target="_blank" rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6"
-                            fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M7.45 18.55h9.1V5.45h-9.1v13.1Zm-2.9-13.1H.95v13.1h3.6v-13.1Zm16.7 0h-3.6v13.1h3.6v-13.1Z">
-                            </path>
-                        </svg></a>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Typing Animation
-        const phrases = [
-            "Engineering Africa's",
-            "Decentralized Future"
-        ];
+        // PARTICLE SYSTEM
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
+        const particles = [];
+        const particleCount = 100;
+        const mouse = { x: null, y: null, radius: 150 };
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+                // Mouse interaction
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+                    this.x -= Math.cos(angle) * force * 2;
+                    this.y -= Math.sin(angle) * force * 2;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(232, 90, 42, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        const opacity = 1 - (distance / 120);
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${opacity * 0.2})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        init();
+        animate();
+
+        // TYPING ANIMATION
+        const phrases = ["Engineering Africa's", "Decentralized Future"];
         let phraseIndex = 0;
         let wordIndex = 0;
-        let currentPhrase = [];
         const typingContainer = document.getElementById('heroTyping');
 
         function typeWord() {
@@ -848,9 +911,7 @@
                     wordSpan.className = 'typing-word current';
                     wordSpan.textContent = words[wordIndex];
 
-                    // Mark previous words as typed
-                    const allWords = typingContainer.querySelectorAll('.typing-word');
-                    allWords.forEach(word => {
+                    typingContainer.querySelectorAll('.typing-word').forEach(word => {
                         if (word.classList.contains('current')) {
                             word.classList.remove('current');
                             word.classList.add('typed');
@@ -858,68 +919,93 @@
                     });
 
                     typingContainer.appendChild(wordSpan);
-                    currentPhrase.push(wordSpan);
                     wordIndex++;
-
                     setTimeout(typeWord, 300);
                 } else {
-                    // Move to next phrase
                     phraseIndex++;
                     wordIndex = 0;
 
                     if (phraseIndex < phrases.length) {
-                        // Add line break
                         typingContainer.appendChild(document.createElement('br'));
                         setTimeout(typeWord, 400);
                     } else {
-                        // Animation complete, add cursor
                         const cursor = document.createElement('span');
                         cursor.className = 'cursor';
                         typingContainer.appendChild(cursor);
-
-                        // Remove blur from all words after completion
-                        setTimeout(() => {
-                            const allWords = typingContainer.querySelectorAll('.typing-word');
-                            allWords.forEach(word => {
-                                word.classList.remove('typed');
-                                word.style.opacity = '1';
-                                word.style.filter = 'blur(0)';
-                            });
-                        }, 1000);
                     }
                 }
             }
         }
 
-        // Start typing animation when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(typeWord, 500);
-            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        // COUNTER ANIMATION
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
 
-            // Scroll animations
-            const fadeElements = document.querySelectorAll('.fade-in');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-
-            // Header scroll effect
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target >= 1000 ? (target / 1000).toFixed(0) + 'K+' : target + '+';
+                    clearInterval(timer);
                 } else {
-                    header.classList.remove('scrolled');
+                    element.textContent = current >= 1000 ? (current / 1000).toFixed(1) + 'K' : Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // SCROLL REVEAL
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+
+                    // Start counters when visible
+                    const counters = element.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            animateCounter(counter);
+                            counter.classList.add('counted');
+                        }
+                    });
                 }
             });
+        }
+
+        // NAV SCROLL
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            reveal();
+        });
+
+        // 3D CARD MOUSE EFFECT
+        document.querySelectorAll('.card-3d').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+            });
+        });
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWord, 500);
+            document.getElementById('year').textContent = new Date().getFullYear();
+            reveal();
         });
     </script>
 </body>
