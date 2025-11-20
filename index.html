@@ -16,25 +16,41 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --color-primary: #D97706;
-            --color-background: #000000;
-            --color-surface: rgba(255, 255, 255, 0.05);
-            --color-border: rgba(255, 255, 255, 0.1);
+            --color-primary: #FF6B35;
+            --color-secondary: #00D9FF;
+            --color-accent: #FFD23F;
+            --color-background: #0A0E27;
+            --color-surface: rgba(255, 255, 255, 0.03);
+            --color-border: rgba(255, 255, 255, 0.08);
             --color-text-primary: #FFFFFF;
-            --color-text-secondary: #A0A0A0;
-            --color-text-subtle: #6B7280;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-background);
-            color: var(--color-text-primary);
-            overflow-x: hidden;
+            --color-text-secondary: #B4B8D0;
+            --color-text-subtle: #7A7E98;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Background Effects */
         .background-wrapper {
             position: fixed;
             top: 0;
@@ -44,68 +60,215 @@
             z-index: -1;
             overflow: hidden;
         }
+
         .background-gradient {
             position: absolute;
             width: 200%;
             height: 200%;
             top: -50%;
             left: -50%;
-            background: radial-gradient(circle at 50% 50%, rgba(30, 81, 123, 0.2), rgba(0,0,0,0) 40%),
-                        radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.15), rgba(0,0,0,0) 35%),
-                        radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.15), rgba(0,0,0,0) 35%);
-            animation: rotate 45s infinite linear;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(255, 107, 53, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 60%, rgba(0, 217, 255, 0.12), transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(255, 210, 63, 0.08), transparent 35%);
+            animation: rotate 60s infinite linear;
         }
+
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
+        /* Mesh Background Pattern */
+        .mesh-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        /* Header Styles */
         .header {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--color-border);
-        }
-        
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
         }
+
+        .header.scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), #FF8C42);
+            color: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(217, 119, 6, 0.6);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
         }
+
         .btn-secondary {
             background: var(--color-surface);
             color: var(--color-text-primary);
-            border: 1px solid var(--color-border);
+            border: 1.5px solid var(--color-border);
             transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-secondary);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Card Styles */
         .section-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: 1.5rem;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 800;
-            color: var(--color-text-primary);
+
+        .section-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.15);
         }
-        
-        .text-secondary {
-            color: var(--color-text-secondary);
+
+        /* Typing Animation Styles */
+        .typing-container {
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        
-        .text-subtle {
-            color: var(--color-text-subtle);
+
+        .typing-word {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+            margin: 0 0.3rem;
+        }
+
+        .typing-word.typed {
+            opacity: 0.35;
+            filter: blur(1.5px);
+            transition: all 0.5s ease;
+        }
+
+        .typing-word.current {
+            opacity: 1;
+            filter: blur(0);
+            color: var(--color-primary);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 2.5rem;
+            background: var(--color-primary);
+            margin-left: 0.2rem;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Stats Section */
+        .stat-card {
+            padding: 2rem;
+            background: var(--color-surface);
+            border-radius: 1rem;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--color-primary);
+            transform: scale(1.05);
+        }
+
+        /* Initiative Cards */
+        .initiative-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .initiative-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .initiative-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Partner Logos */
+        .partner-logo-container {
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .partner-logo-container:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .faq-item summary {
@@ -114,100 +277,116 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--color-border);
+            padding: 1.5rem 1rem;
+            font-weight: 600;
         }
+
         .faq-item summary::-webkit-details-marker {
             display: none;
         }
+
         .faq-item summary .icon {
             transition: transform 0.3s ease;
-            background-color: transparent;
-            border: none;
-            border-radius: 9999px;
-            padding: 0.25rem;
             width: 2rem;
             height: 2rem;
         }
-        .faq-item details:not([open]) summary .icon {
-            transform: rotate(0deg);
-        }
-        .faq-item details.open summary .icon {
+
+        .faq-item details[open] summary .icon {
             transform: rotate(45deg);
         }
+
         .faq-answer {
-            padding-bottom: 1rem;
+            padding: 0 1rem 1.5rem 1rem;
             color: var(--color-text-secondary);
-            font-size: 0.875rem;
+            line-height: 1.8;
         }
-        
-        .hero-video-mockup-container {
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Video Container */
+        .hero-video-container {
             position: relative;
-            width: 100%;
-            height: 80vh;
-            max-height: 500px;
-            overflow: hidden;
             border-radius: 1.5rem;
+            overflow: hidden;
+            border: 2px solid var(--color-border);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .hero-video-mockup-container video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 72px;
-            height: 72px;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+        /* Social Links */
+        .social-link {
             transition: all 0.3s ease;
         }
-        .play-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%) scale(1.05);
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: var(--color-primary) !important;
         }
-        .play-button svg {
-            fill: #fff;
-            width: 24px;
-            height: 24px;
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            .cursor {
+                height: 1.8rem;
+            }
         }
     </style>
 </head>
 
-<body x-data="{ mobileMenuOpen: false, openQuestion: null }">
+<body x-data="{ mobileMenuOpen: false }">
     <div class="background-wrapper">
         <div class="background-gradient"></div>
+        <div class="mesh-pattern"></div>
     </div>
 
-    <header class="header sticky top-0 z-50">
+    <header id="header" class="header sticky top-0 z-50">
         <nav class="container mx-auto px-4 lg:px-8 flex items-center justify-between h-20">
             <a href="#home" class="flex items-center space-x-3">
-                <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-10 w-auto">
+                <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-12 w-auto">
                 <span class="text-xl font-bold text-white">Web3 Africa</span>
             </a>
             <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-300">
-                <a href="#our-mission" class="hover:text-white transition-colors">Our Mission</a>
-                <a href="#initiatives" class="hover:text-white transition-colors">Core Initiatives</a>
-                <a href="#partners" class="hover:text-white transition-colors">Partners</a>
-                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+                <a href="#our-mission" class="hover:text-white transition-colors duration-300">Our Mission</a>
+                <a href="#initiatives" class="hover:text-white transition-colors duration-300">Core Initiatives</a>
+                <a href="#partners" class="hover:text-white transition-colors duration-300">Partners</a>
+                <a href="#faq" class="hover:text-white transition-colors duration-300">FAQ</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="#community" class="btn-primary font-semibold py-2 px-5 rounded-full text-sm hidden sm:block">Join Community</a>
+                <a href="#community" class="btn-primary font-semibold py-2.5 px-6 rounded-full text-sm hidden sm:block">Join Community</a>
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden text-gray-300 hover:text-white">
                     <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 </button>
@@ -219,139 +398,177 @@
                 <a href="#initiatives" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium text-gray-300 hover:text-white">Core Initiatives</a>
                 <a href="#partners" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium text-gray-300 hover:text-white">Partners</a>
                 <a href="#faq" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium text-gray-300 hover:text-white">FAQ</a>
-                <a href="#community" @click="mobileMenuOpen = false" class="block pt-4"><span class="btn-primary font-semibold py-2 px-5 rounded-full text-sm">Join Community</span></a>
+                <a href="#community" @click="mobileMenuOpen = false" class="block pt-4"><span class="btn-primary font-semibold py-2 px-5 rounded-full text-sm inline-block">Join Community</span></a>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 lg:px-8">
+        <!-- Hero Section -->
         <section id="home" class="py-24 md:py-32">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="text-center lg:text-left">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-                        Engineering Africa's<br>Decentralized Future
-                    </h1>
+                    <div id="heroTyping" class="typing-container text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                        <!-- Typing animation will be inserted here -->
+                    </div>
+                    <p class="text-lg md:text-xl text-[var(--color-text-secondary)] mb-8 max-w-xl mx-auto lg:mx-0">
+                        Empowering Africa through blockchain education, community building, and innovation.
+                    </p>
                     <div class="mt-8 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
-                        <a href="#initiatives" class="btn-primary font-semibold py-3 px-8 rounded-full text-base w-full sm:w-auto">Explore Initiatives</a>
-                        <a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank" rel="noopener noreferrer" class="btn-secondary font-semibold py-3 px-8 rounded-full text-base w-full sm:w-auto">Read Whitepaper</a>
+                        <a href="#initiatives" class="btn-primary font-semibold py-3.5 px-8 rounded-full text-base w-full sm:w-auto">Explore Initiatives</a>
+                        <a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank" rel="noopener noreferrer" class="btn-secondary font-semibold py-3.5 px-8 rounded-full text-base w-full sm:w-auto">Read Whitepaper</a>
                     </div>
                 </div>
-                <div class="relative w-full h-80 md:h-[400px] rounded-3xl overflow-hidden">
+                <div class="hero-video-container relative w-full h-80 md:h-[400px]">
                     <video id="heroVideo" class="w-full h-full object-cover" autoplay loop playsinline poster="Web3_Nigeria_UI-UX-MODIFIED_page-0001.jpg" muted
                            onclick="this.muted = !this.muted">
                         <source src="herovideo.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="play-button hidden">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 ml-1">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-white">15</h3>
-                    <p class="mt-2 text-sm text-secondary">Events</p>
+        <!-- Stats Section -->
+        <section class="py-12 fade-in">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card text-center">
+                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">15+</h3>
+                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Events</p>
                 </div>
-                <div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-white">36K</h3>
-                    <p class="mt-2 text-sm text-secondary">Community Members</p>
+                <div class="stat-card text-center">
+                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">36K+</h3>
+                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Community Members</p>
                 </div>
-                <div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-white">6428</h3>
-                    <p class="mt-2 text-sm text-secondary">Projects Launched</p>
+                <div class="stat-card text-center">
+                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">6.4K+</h3>
+                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Projects Launched</p>
                 </div>
-                <div>
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-white">900</h3>
-                    <p class="mt-2 text-sm text-secondary">Bootcamps & Seminars</p>
+                <div class="stat-card text-center">
+                    <h3 class="text-4xl md:text-5xl font-extrabold gradient-text">900+</h3>
+                    <p class="mt-2 text-sm text-[var(--color-text-secondary)]">Bootcamps</p>
                 </div>
             </div>
         </section>
 
-        <section id="our-mission" class="py-20">
+        <!-- Mission Section -->
+        <section id="our-mission" class="py-20 fade-in">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Our mission</h2>
-                    <p class="mt-4 text-lg text-secondary">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">Our Mission</h2>
+                    <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
                         To unlock Africa's potential by providing accessible Web3 education, fostering a vibrant community of builders, and connecting talent to global opportunities.
                     </p>
-                    <a href="https://web3africa.gitbook.io/web3-africa-documentation/vision-and-mission" class="mt-6 inline-block font-medium text-white px-6 py-3 bg-white bg-opacity-5 rounded-full transition-colors hover:bg-opacity-10">
+                    <a href="https://web3africa.gitbook.io/web3-africa-documentation/vision-and-mission" class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
                         Learn More
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
                 </div>
-                <div class="rounded-3xl overflow-hidden">
+                <div class="rounded-3xl overflow-hidden border-2 border-[var(--color-border)] shadow-2xl">
                     <img src="Web3africa-our-mission.png" alt="A diverse group of people collaborating on Web3 projects" class="w-full h-auto object-cover">
                 </div>
             </div>
         </section>
 
-        <section id="initiatives" class="py-20">
-            <h2 class="text-center text-3xl font-extrabold text-white mb-4">Core Initiatives</h2>
-            <p class="text-center text-secondary mb-12">Explore our core initiatives that are driving Africa's Web3 revolution.</p>
+        <!-- Core Initiatives Section -->
+        <section id="initiatives" class="py-20 fade-in">
+            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-4">Core Initiatives</h2>
+            <p class="text-center text-[var(--color-text-secondary)] mb-12 max-w-2xl mx-auto">
+                Explore our core initiatives that are driving Africa's Web3 revolution.
+            </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="section-card p-6">
-                    <div class="h-40 mb-6 rounded-lg overflow-hidden">
+                <div class="section-card initiative-card p-6">
+                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
                         <img src="Web3africa-skillchain.png" alt="SkillChain Program" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold">SkillChain Program</h3>
-                    <p class="mt-2 text-secondary text-sm">Intensive training for in-demand Web3 skills.</p>
-                    <a href="https://tally.so/r/mJrEGX" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block font-semibold text-orange-400 hover:text-orange-300 text-sm">Apply Now &rarr;</a>
+                    <h3 class="text-2xl font-bold mb-3">SkillChain Program</h3>
+                    <p class="text-[var(--color-text-secondary)] mb-4">
+                        Intensive training for in-demand Web3 skills. Build your future in blockchain development.
+                    </p>
+                    <a href="https://tally.so/r/mJrEGX" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        Apply Now
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
-                <div class="section-card p-6">
-                    <div class="h-40 mb-6 rounded-lg overflow-hidden">
+                <div class="section-card initiative-card p-6">
+                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
                         <img src="Web3africa-ambassador.png" alt="Ambassador Program" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold">Ambassador Program</h3>
-                    <p class="mt-2 text-secondary text-sm">Become a community leader and represent Web3 Africa.</p>
-                    <a href="https://forms.gle/w7tbXAA7jwbNFYe87" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block font-semibold text-orange-400 hover:text-orange-300 text-sm">Become an Ambassador &rarr;</a>
+                    <h3 class="text-2xl font-bold mb-3">Ambassador Program</h3>
+                    <p class="text-[var(--color-text-secondary)] mb-4">
+                        Become a community leader and represent Web3 Africa in your region.
+                    </p>
+                    <a href="https://forms.gle/w7tbXAA7jwbNFYe87" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        Become an Ambassador
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
-                <div class="section-card p-6">
-                    <div class="h-40 mb-6 rounded-lg overflow-hidden">
+                <div class="section-card initiative-card p-6">
+                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
                         <img src="incubator.png" alt="Project Incubation" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold">Project Incubation</h3>
-                    <p class="mt-2 text-secondary text-sm">Resources and mentorship to build and launch your idea.</p>
-                    <a href="mailto:web3africa2024@gmail.com" class="mt-4 inline-block font-semibold text-orange-400 hover:text-orange-300 text-sm">Submit a Project &rarr;</a>
+                    <h3 class="text-2xl font-bold mb-3">Project Incubation</h3>
+                    <p class="text-[var(--color-text-secondary)] mb-4">
+                        Resources and mentorship to build and launch your innovative Web3 idea.
+                    </p>
+                    <a href="mailto:web3africa2024@gmail.com" class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        Submit a Project
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
-                <div class="section-card p-6">
-                     <div class="h-40 mb-6 rounded-lg overflow-hidden">
+                <div class="section-card initiative-card p-6">
+                    <div class="h-48 mb-6 rounded-xl overflow-hidden border border-[var(--color-border)]">
                         <img src="web3africa-events.png" alt="Bootcamps and Events" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold">Bootcamps & Events</h3>
-                    <p class="mt-2 text-secondary text-sm">Hands-on workshops and insightful campus meetups.</p>
-                    <a href="https://docs.google.com/document/d/15fk93--FV_T__VQ_f11MhJbV0uKbTaIXcIZuahUmcU0/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block font-semibold text-orange-400 hover:text-orange-300 text-sm">View Schedule &rarr;</a>
+                    <h3 class="text-2xl font-bold mb-3">Bootcamps & Events</h3>
+                    <p class="text-[var(--color-text-secondary)] mb-4">
+                        Hands-on workshops and insightful campus meetups across Africa.
+                    </p>
+                    <a href="https://docs.google.com/document/d/15fk93--FV_T__VQ_f11MhJbV0uKbTaIXcIZuahUmcU0/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors">
+                        View Schedule
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="partners" class="py-20 text-center">
-            <p class="text-sm text-secondary uppercase mb-2 font-semibold">Our partners around the globe</p>
-            <div class="section-card p-8 md:p-12 flex flex-wrap justify-center items-center gap-12 md:gap-24">
-                 <div class="flex flex-col items-center">
-                     <img src="assets/Partner1.png" alt="EdenFi Logo" class="h-28 opacity-70 hover:opacity-100 transition-opacity mb-2">
-                     <p class="text-sm text-secondary">EdenFi</p>
-                 </div>
-                 <div class="flex flex-col items-center">
-                     <img src="assets/Partner2.png" alt="Men in DeFi Logo" class="h-28 opacity-70 hover:opacity-100 transition-opacity mb-2">
-                     <p class="text-sm text-secondary">Men in DeFi</p>
-                 </div>
-                 <div class="flex flex-col items-center">
-                     <img src="assets/partner3.PNG" alt="Build A DAO Ethiopia Logo" class="h-28 opacity-70 hover:opacity-100 transition-opacity mb-2">
-                     <p class="text-sm text-secondary">Build A DAO Ethiopia</p>
-                 </div>
+        <!-- Partners Section -->
+        <section id="partners" class="py-20 text-center fade-in">
+            <p class="text-sm text-[var(--color-text-secondary)] uppercase mb-6 font-semibold tracking-wider">Trusted Partners Around the Globe</p>
+            <div class="section-card p-8 md:p-12">
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
+                    <div class="partner-logo-container flex flex-col items-center">
+                        <img src="assets/Partner1.png" alt="EdenFi Logo" class="h-24 md:h-28 mb-3">
+                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">EdenFi</p>
+                    </div>
+                    <div class="partner-logo-container flex flex-col items-center">
+                        <img src="assets/Partner2.png" alt="Men in DeFi Logo" class="h-24 md:h-28 mb-3">
+                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Men in DeFi</p>
+                    </div>
+                    <div class="partner-logo-container flex flex-col items-center">
+                        <img src="assets/partner3.PNG" alt="Build A DAO Ethiopia Logo" class="h-24 md:h-28 mb-3">
+                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Build A DAO Ethiopia</p>
+                    </div>
+                    <div class="partner-logo-container flex flex-col items-center">
+                        <img src="irwa.png" alt="IncomRWA Logo" class="h-24 md:h-28 mb-3">
+                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">IncomRWA</p>
+                    </div>
+                    <div class="partner-logo-container flex flex-col items-center">
+                        <img src="edu.png" alt="Edubuk Logo" class="h-24 md:h-28 mb-3">
+                        <p class="text-sm text-[var(--color-text-secondary)] font-medium">Edubuk</p>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section id="faq" class="py-20" x-data="{ openQuestion: null }">
-            <h2 class="text-center text-3xl font-extrabold text-white mb-4">Frequently asked questions</h2>
-            <div class="max-w-4xl mx-auto divide-y divide-gray-800">
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 fade-in">
+            <h2 class="text-center text-3xl md:text-4xl font-extrabold text-white mb-4">Frequently Asked Questions</h2>
+            <p class="text-center text-[var(--color-text-secondary)] mb-12">Everything you need to know about Web3 Africa</p>
+            <div class="max-w-4xl mx-auto">
                 <div class="faq-item">
-                    <details :open="openQuestion === 1">
-                        <summary @click="openQuestion = openQuestion === 1 ? null : 1" class="font-semibold text-lg">
+                    <details>
+                        <summary class="font-semibold text-lg">
                             What is Web3 Africa?
                             <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         </summary>
@@ -361,8 +578,8 @@
                     </details>
                 </div>
                 <div class="faq-item">
-                    <details :open="openQuestion === 2">
-                        <summary @click="openQuestion = openQuestion === 2 ? null : 2" class="font-semibold text-lg">
+                    <details>
+                        <summary class="font-semibold text-lg">
                             Who can join the SkillChain Program?
                             <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         </summary>
@@ -372,19 +589,19 @@
                     </details>
                 </div>
                 <div class="faq-item">
-                    <details :open="openQuestion === 3">
-                        <summary @click="openQuestion = openQuestion === 3 ? null : 3" class="font-semibold text-lg">
+                    <details>
+                        <summary class="font-semibold text-lg">
                             How can I become a partner?
                             <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         </summary>
                         <div class="faq-answer">
-                            We are always open to collaborating with organizations that share our vision for a decentralized Africa. If you're interested in partnering with us on events, education, or ecosystem development, please reach out to us via email at <a href="mailto:web3africa2024@gmail.com" class="text-orange-400 hover:underline">web3africa2024@gmail.com</a>.
+                            We are always open to collaborating with organizations that share our vision for a decentralized Africa. If you're interested in partnering with us on events, education, or ecosystem development, please reach out to us via email at <a href="mailto:web3africa2024@gmail.com" class="text-[var(--color-primary)] hover:underline">web3africa2024@gmail.com</a>.
                         </div>
                     </details>
                 </div>
-                 <div class="faq-item">
-                    <details :open="openQuestion === 4">
-                        <summary @click="openQuestion = openQuestion === 4 ? null : 4" class="font-semibold text-lg">
+                <div class="faq-item">
+                    <details>
+                        <summary class="font-semibold text-lg">
                             What kind of events do you host?
                             <svg class="w-6 h-6 icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         </summary>
@@ -396,79 +613,172 @@
             </div>
         </section>
 
-        <section id="community" class="py-20">
+        <!-- Community Section -->
+        <section id="community" class="py-20 fade-in">
             <div class="section-card p-8 md:p-12 text-center">
-                <h2 class="text-3xl font-extrabold text-white">Join our Community</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-secondary">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Join Our Community</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-[var(--color-text-secondary)] mb-8">
                     Connect with thousands of builders, creators, and innovators. Get support, share ideas, and be part of Africa's Web3 revolution.
                 </p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
-                    <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer" class="btn-secondary font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                    <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer" class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
                         X (Twitter)
                     </a>
-                    <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer" class="btn-secondary font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                    <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer" class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.24-3.11-2.04 2.07c-.23.23-.42.42-.83.42z"></path></svg>
                         Telegram
                     </a>
-                    <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer" class="btn-secondary font-semibold py-3 px-6 rounded-full flex items-center gap-2">
+                    <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer" class="btn-secondary social-link font-semibold py-3 px-6 rounded-full flex items-center gap-2">
                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8254-.6184 1.2525a17.2963 17.2963 0 00-4.8776 0 18.01 18.01 0 00-.6184-1.2525.077.077 0 00-.0785-.0371a19.7913 19.7913 0 00-4.8851 1.5152.0699.0699 0 00-.0321.027c-1.8431 4.6745-1.8431 9.673 0 14.3475a.069.069 0 00.0321.027c1.6222.4877 3.2651.8741 4.8851 1.1591a.076.076 0 00.0785-.0371c.2376-.4687.4599-.959.6443-1.4563a.0731.0731 0 00-.0429-.0861a12.8333 12.8333 0 01-1.2581-.6074a.0711.0711 0 01-.0076-.1037c.1258-.1744.2516-.3488.3774-.539a.0721.0721 0 01.082-.027c.4646.1349.9292.2539 1.4093.371a.077.077 0 00.0861-.051c.2309-.6877.3938-1.4225.4985-2.21822a.075.075 0 00-.051-.0861c-1.022-1.01-2.181-1.6248-3.4475-1.85a.0741.0741 0 01-.0586-.0861c.002-.021.003-.042.004-.063a.0711.0711 0 01.025-.059c1.048-1.028 2.34-1.442 3.815-1.442s2.767.414 3.815 1.442a.0711.0711 0 01.025.059c.001.021.002.042.004.063a.0741.0741 0 01-.0586.0861c-1.2665.2252-2.4255.84-3.4475 1.85a.075.075 0 00-.051.0861c.1047.7597.2676 1.4945.4985 2.21822a.077.077 0 00.0861.051c.4801-.1171.9447-.2361 1.4093-.371a.0721.0721 0 01.082-.027c.1258.1902.2516.3646.3774.539a.0711.0711 0 01-.0076.1037 12.8333 12.8333 0 01-1.2581.6074a.0731.0731 0 00-.0429.0861c.1844.4973.4067.9876.6443 1.4563a.076.076 0 00.0785.0371c1.6199-.285 3.2631-.6714 4.8851-1.1591a.069.069 0 00.0321-.027c1.8431-4.6745 1.8431-9.673 0-14.3475a.0699.0699 0 00-.0321-.027z"></path></svg>
                         Discord
                     </a>
                 </div>
             </div>
         </section>
+    </main>
 
-        <footer id="contact" class="border-t border-gray-800/50 mt-20">
-            <div class="container mx-auto px-4 lg:px-8 py-16">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div>
-                        <a href="#home" class="flex items-center space-x-3 mb-6">
-                            <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-10 w-auto">
-                            <span class="text-xl font-bold text-white">Web3 Africa</span>
-                        </a>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white mb-4">Company</h4>
-                        <ul class="space-y-3 text-secondary text-sm">
-                            <li><a href="#our-mission" class="hover:text-white transition-colors">Our Mission</a></li>
-                            <li><a href="#initiatives" class="hover:text-white transition-colors">Core Initiatives</a></li>
-                            <li><a href="#partners" class="hover:text-white transition-colors">Partners</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white mb-4">Resources</h4>
-                        <ul class="space-y-3 text-secondary text-sm">
-                            <li><a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Whitepaper</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                            <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white mb-4">Contact</h4>
-                        <ul class="space-y-3 text-secondary text-sm">
-                            <li><a href="#" class="hover:text-white transition-colors">Email</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Join Community</a></li>
-                        </ul>
-                    </div>
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-gray-800/50 mt-20">
+        <div class="container mx-auto px-4 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <a href="#home" class="flex items-center space-x-3 mb-6">
+                        <img src="web3africa-logo.png" alt="Web3 Africa Logo" class="h-10 w-auto">
+                        <span class="text-xl font-bold text-white">Web3 Africa</span>
+                    </a>
+                    <p class="text-sm text-[var(--color-text-secondary)]">Building Africa's decentralized future</p>
                 </div>
-                <div class="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t border-gray-800/50">
-                     <p class="text-secondary text-sm order-2 md:order-1 mt-4 md:mt-0">&copy; <span id="copyright-year"></span> Web3 Africa. All Rights Reserved. Lagos, Nigeria.</p>
-                     <div class="flex items-center space-x-5 order-1 md:order-2">
-                        <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
-                        <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.24-3.11-2.04 2.07c-.23.23-.42.42-.83.42z"></path></svg></a>
-                        <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8254-.6184 1.2525a17.2963 17.2963 0 00-4.8776 0 18.01 18.01 0 00-.6184-1.2525.077.077 0 00-.0785-.0371a19.7913 19.7913 0 00-4.8851 1.5152.0699.0699 0 00-.0321.027c-1.8431 4.6745-1.8431 9.673 0 14.3475a.069.069 0 00.0321.027c1.6222.4877 3.2651.8741 4.8851 1.1591a.076.076 0 00.0785-.0371c.2376-.4687.4599-.959.6443-1.4563a.0731.0731 0 00-.0429-.0861a12.8333 12.8333 0 01-1.2581-.6074a.0711.0711 0 01-.0076-.1037c.1258-.1744.2516-.3488.3774-.539a.0721.0721 0 01.082-.027c.4646.1349.9292.2539 1.4093.371a.077.077 0 00.0861-.051c.2309-.6877.3938-1.4225.4985-2.21822a.075.075 0 00-.051-.0861c-1.022-1.01-2.181-1.6248-3.4475-1.85a.0741.0741 0 01-.0586-.0861c.002-.021.003-.042.004-.063a.0711.0711 0 01.025-.059c1.048-1.028 2.34-1.442 3.815-1.442s2.767.414 3.815 1.442a.0711.0711 0 01.025.059c.001.021.002.042.004.063a.0741.0741 0 01-.0586.0861c-1.2665.2252-2.4255.84-3.4475 1.85a.075.075 0 00-.051.0861c.1047.7597.2676 1.4945.4985 2.21822a.077.077 0 00.0861.051c.4801-.1171.9447-.2361 1.4093-.371a.0721.0721 0 01.082-.027c.1258.1902.2516.3646.3774.539a.0711.0711 0 01-.0076.1037 12.8333 12.8333 0 01-1.2581.6074a.0731.0731 0 00-.0429.0861c.1844.4973.4067.9876.6443 1.4563a.076.076 0 00.0785.0371c1.6199-.285 3.2631-.6714 4.8851-1.1591a.069.069 0 00.0321-.027c1.8431-4.6745 1.8431-9.673 0-14.3475a.0699.0699 0 00-.0321-.027z"></path></svg></a>
-                        <a href="https://web3africaa.medium.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.45 18.55h9.1V5.45h-9.1v13.1Zm-2.9-13.1H.95v13.1h3.6v-13.1Zm16.7 0h-3.6v13.1h3.6v-13.1Z"></path></svg></a>
-                    </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Company</h4>
+                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
+                        <li><a href="#our-mission" class="hover:text-white transition-colors">Our Mission</a></li>
+                        <li><a href="#initiatives" class="hover:text-white transition-colors">Core Initiatives</a></li>
+                        <li><a href="#partners" class="hover:text-white transition-colors">Partners</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Resources</h4>
+                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
+                        <li><a href="https://web3africa.gitbook.io/web3-africa-documentation" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Whitepaper</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Contact</h4>
+                    <ul class="space-y-3 text-[var(--color-text-secondary)] text-sm">
+                        <li><a href="mailto:web3africa2024@gmail.com" class="hover:text-white transition-colors">Email</a></li>
+                        <li><a href="#community" class="hover:text-white transition-colors">Join Community</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+            <div class="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t border-gray-800/50">
+                 <p class="text-[var(--color-text-secondary)] text-sm order-2 md:order-1 mt-4 md:mt-0">&copy; <span id="copyright-year"></span> Web3 Africa. All Rights Reserved. Lagos, Nigeria.</p>
+                 <div class="flex items-center space-x-5 order-1 md:order-2">
+                    <a href="https://x.com/web3afric" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a href="https://t.me/web3Afric" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.24-3.11-2.04 2.07c-.23.23-.42.42-.83.42z"></path></svg></a>
+                    <a href="https://discord.gg/ahE7tcUA" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8254-.6184 1.2525a17.2963 17.2963 0 00-4.8776 0 18.01 18.01 0 00-.6184-1.2525.077.077 0 00-.0785-.0371a19.7913 19.7913 0 00-4.8851 1.5152.0699.0699 0 00-.0321.027c-1.8431 4.6745-1.8431 9.673 0 14.3475a.069.069 0 00.0321.027c1.6222.4877 3.2651.8741 4.8851 1.1591a.076.076 0 00.0785-.0371c.2376-.4687.4599-.959.6443-1.4563a.0731.0731 0 00-.0429-.0861a12.8333 12.8333 0 01-1.2581-.6074a.0711.0711 0 01-.0076-.1037c.1258-.1744.2516-.3488.3774-.539a.0721.0721 0 01.082-.027c.4646.1349.9292.2539 1.4093.371a.077.077 0 00.0861-.051c.2309-.6877.3938-1.4225.4985-2.21822a.075.075 0 00-.051-.0861c-1.022-1.01-2.181-1.6248-3.4475-1.85a.0741.0741 0 01-.0586-.0861c.002-.021.003-.042.004-.063a.0711.0711 0 01.025-.059c1.048-1.028 2.34-1.442 3.815-1.442s2.767.414 3.815 1.442a.0711.0711 0 01.025.059c.001.021.002.042.004.063a.0741.0741 0 01-.0586.0861c-1.2665.2252-2.4255.84-3.4475 1.85a.075.075 0 00-.051.0861c.1047.7597.2676 1.4945.4985 2.21822a.077.077 0 00.0861.051c.4801-.1171.9447-.2361 1.4093-.371a.0721.0721 0 01.082-.027c.1258.1902.2516.3646.3774.539a.0711.0711 0 01-.0076.1037 12.8333 12.8333 0 01-1.2581.6074a.0731.0731 0 00-.0429.0861c.1844.4973.4067.9876.6443 1.4563a.076.076 0 00.0785.0371c1.6199-.285 3.2631-.6714 4.8851-1.1591a.069.069 0 00.0321-.027c1.8431-4.6745 1.8431-9.673 0-14.3475a.0699.0699 0 00-.0321-.027z"></path></svg></a>
+                    <a href="https://web3africaa.medium.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors social-link"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.45 18.55h9.1V5.45h-9.1v13.1Zm-2.9-13.1H.95v13.1h3.6v-13.1Zm16.7 0h-3.6v13.1h3.6v-13.1Z"></path></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <script>
+        // Typing Animation
+        const phrases = [
+            "Engineering Africa's",
+            "Decentralized Future"
+        ];
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        let phraseIndex = 0;
+        let wordIndex = 0;
+        let currentPhrase = [];
+        const typingContainer = document.getElementById('heroTyping');
+
+        function typeWord() {
+            if (phraseIndex < phrases.length) {
+                const words = phrases[phraseIndex].split(' ');
+                
+                if (wordIndex < words.length) {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'typing-word current';
+                    wordSpan.textContent = words[wordIndex];
+                    
+                    // Mark previous words as typed
+                    const allWords = typingContainer.querySelectorAll('.typing-word');
+                    allWords.forEach(word => {
+                        if (word.classList.contains('current')) {
+                            word.classList.remove('current');
+                            word.classList.add('typed');
+                        }
+                    });
+                    
+                    typingContainer.appendChild(wordSpan);
+                    currentPhrase.push(wordSpan);
+                    wordIndex++;
+                    
+                    setTimeout(typeWord, 300);
+                } else {
+                    // Move to next phrase
+                    phraseIndex++;
+                    wordIndex = 0;
+                    
+                    if (phraseIndex < phrases.length) {
+                        // Add line break
+                        typingContainer.appendChild(document.createElement('br'));
+                        setTimeout(typeWord, 400);
+                    } else {
+                        // Animation complete, add cursor
+                        const cursor = document.createElement('span');
+                        cursor.className = 'cursor';
+                        typingContainer.appendChild(cursor);
+                        
+                        // Remove blur from all words after completion
+                        setTimeout(() => {
+                            const allWords = typingContainer.querySelectorAll('.typing-word');
+                            allWords.forEach(word => {
+                                word.classList.remove('typed');
+                                word.style.opacity = '1';
+                                word.style.filter = 'blur(0)';
+                            });
+                        }, 1000);
+                    }
+                }
+            }
+        }
+
+        // Start typing animation when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWord, 500);
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            
+            // Scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
             });
-        </script>
-    </body>
-    </html>
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
